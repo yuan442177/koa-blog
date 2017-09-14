@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+<!--  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>-->
+</head>
+<body>
+<%= JSON.stringify(body.data)%>
+  <table border="1" width="100%">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>邮箱</th>
+      <th>用户名</th>
+      <th>密码</th>
+      <th>注册时间戳</th>
+      <th>权限</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i = 0;i<body.data.length;i++){%>
+    <tr>
+      <td><%= body.data[i].id%></td>
+      <td><%= body.data[i].email%></td>
+      <td><%= body.data[i].name%></td>
+      <td><%= body.data[i].password%></td>
+      <td id="oldTime"><%= body.data[i].create_time%></td>
+      <td><%= body.data[i].level%></td>
+      <td>
+        <a href="?act=mod&id=<%=body.data[i].id%>">修改</a>
+        <a href="?act=remove&id=<%= body.data[i].id%>"
+           onclick="return confirm('确定删除吗')">删除</a>
+      </td>
+    </tr>
+    <%}%>
+    </tbody>
+  </table>
+<button onclick="times()">dddd</button>
+</body>
+</html>

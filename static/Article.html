@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        function GetQueryString(name)//获取url参数
+        {
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]); return null;
+        }
+
+        $(document).ready(function () {
+                $.ajax({
+                    url: '/api/admin/selectArticleUser',
+                    type: "POST",
+                    data:{id:GetQueryString('id')},
+                    success: function(data){
+                        let title_node = $("#Article_content").find('h2');
+                        let author_node = $("#Article_content").find('aside');
+                        let content_node = $("#Article_content").find('section');
+                        let time_node = $("#Article_content").find('p');
+                        console.log(data[0])
+                        title_node[0].innerText = '标题:'+data[0].title
+                        author_node[0].innerText = '作者:'+data[0].author
+                        content_node[0].innerHTML = data[0].content
+                        time_node[0].innerText = '时间:'+data[0].time
+                    },
+                    error:function(error)
+                    {
+                        console.log(error)
+                    }
+                });
+        })
+    </script>
+</head>
+<body>
+<h1>文章内容</h1>
+<div id="Article_content">
+    <article>
+        <header><h2></h2><aside></aside></header>
+        <pre>
+        <section>
+        </section>
+        </pre>
+        <p></p>
+    </article>
+</div>
+</body>
+</html>

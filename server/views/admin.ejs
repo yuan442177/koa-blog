@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script>
+      $(document).ready(function () {
+          $.ajax({
+              url: '/api/admin/selectAllArticle',
+              type: "POST",
+              success: function(data){
+                  $('#Article').appendChild(data)
+              },
+              error:function(error)
+              {
+                  console.log(error)
+              }
+          });
+      });
+  </script>
+
+  <style>
+    /*.shadow {position:fixed; width:100%; height:100%; background:#000; opacity:0.3; filter:alpha(opacity:30);left:0; top: 0;}*/
+    .mod_dialog {width:300px; height:200px; border:1px solid black; background:#fff; margin: 0 auto}
+  </style>
+</head>
+
+<body>
+<p><%= username%>
+  <a href="/admin/logout">注销</a>
+</p>
+<p>
+  <a href="register.html">添加用户</a>
+</p>
+<div id="user">
+
+</div>
+  <table border="1" width="100%">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>邮箱</th>
+      <th>用户名</th>
+      <th>密码</th>
+      <th>注册时间戳</th>
+      <th>权限</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(var i = 0;i<body.data.length;i++){%>
+    <tr>
+      <td><%= body.data[i].id%></td>
+      <td><%= body.data[i].email%></td>
+      <td><%= body.data[i].name%></td>
+      <td><%= body.data[i].password%></td>
+      <td id="oldTime"><%= body.data[i].create_time%></td>
+      <td><%= body.data[i].level%></td>
+      <td>
+        <a href="/admin/user?act=mod&id=<%=body.data[i].id%>">修改</a>
+        <a href="?act=remove&id=<%= body.data[i].id%>"
+           onclick="return confirm('确定删除吗')">删除</a>
+      </td>
+    </tr>
+    <%}%>
+    </tbody>
+  </table>
+<% if(typeof updateData != 'undefined'){%>
+<%= JSON.stringify(updateData)%>
+<div class="shadow"></div>
+<div class="mod_dialog">
+  <form action="/api/admin/updateUserInfo.json" method="post">
+      　　<input hidden name="id" value="<%= updateData.id%>"><br>
+    　用户名:<input type="text" name="userName" value="<%= updateData.name%>"><br>
+    　密　码:<input type="text" name="password" value="<%= updateData.password%>"><br>
+    电子邮箱:<input type="email" name="email" value="<%= updateData.email%>"><br>
+    　权　限:<input type="text" name="level" value="<%= updateData.level%>"><br>
+    <input type="submit" value="确认" style="width:100px;height: 50px;">
+    <a href="/admin">取消修改</a>
+  </form>
+</div>
+<%}%>
+</body>
+</html>
