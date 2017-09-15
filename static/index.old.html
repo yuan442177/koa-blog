@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+      <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                url: '/api/admin/selectAllArticleUser',
+                type: "POST",
+                success: function(data){
+                    let ul_node = document.getElementById('Article')
+                    for(i = 0;i<data.length;i++){
+                        let li_node = document.createElement('li')
+                        ul_node.appendChild(li_node)
+                        let a_node = document.createElement('a')
+                        li_node.appendChild(a_node)
+                        a_node.setAttribute("href",'/Article.html?id='+data[i].ID)
+                        let title_node = document.createTextNode(data[i].title)
+                        a_node.appendChild(title_node)
+                    }
+                },
+                error:function(error)
+                {
+                    console.log(error)
+                }
+            });
+        });
+    </script>
+</head>
+<body>
+<h1>#index</h1>
+<h2>入口</h2>
+<ul>
+    <li><a href="login.html">登录接口测试</a></li>
+    <li><a href="register.html">注册接口测试</a></li>
+</ul>
+<h2>文章列表</h2>
+<ul id="Article"></ul>
+</body>
+</html>

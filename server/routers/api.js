@@ -18,7 +18,9 @@ const routers = router
     .post('/admin/updateUserInfo.json', adminInfoController.updateUserInfo)
     .post('/admin/addArticle.json', article.addArticle)
     .post('/admin/selectAllArticleUser', article.selectAllArticleUser)
+    .get('/admin/selectAllArticleUserGet', article.selectAllArticleUser)
     .post('/admin/selectArticleUser', article.selectArticleUser)
+    .post('/admin/selectInPages', article.selectInPages)
 
 
 module.exports = routers

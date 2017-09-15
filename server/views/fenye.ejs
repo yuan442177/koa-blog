@@ -13,18 +13,18 @@
     </style>
 </head>
 <body>
-<h1>#index</h1>
+<h1>分页实现</h1>
 <hr>
-<h2>入口</h2>
-<ul>
-    <li><a href="login.html">登录接口测试</a></li>
-    <li><a href="register.html">注册接口测试</a></li>
-</ul>
+<table>
+    <thead></thead>
+    <tbody>
+    <tr>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
 <hr>
-<h2>文章列表</h2>
-<ul id="Article"></ul>
 <div class="tcdPageCode"></div>
-<hr>
 <script>
     $(function(){
         let pageSize = 2
@@ -45,12 +45,12 @@
             images        : false,
             mouse        : 'press',
             onChange:function(pageIndex){
-                /* alert("pageIndex="+pageIndex);//输出的p为页码*/
-                if(pageIndex == 1){
-                    getData(pageIndex-1)
-                }else{
-                    getData((pageIndex-1)*pageSize)
-                }
+               /* alert("pageIndex="+pageIndex);//输出的p为页码*/
+               if(pageIndex == 1){
+                   getData(pageIndex-1)
+               }else{
+                   getData((pageIndex-1)*pageSize)
+               }
 
             }
         });
@@ -63,19 +63,8 @@
                 success: function(data){
                     /*console.log(data)
                      console.log($('table').find('td'))*/
-                   /* $('table').find('td')[0].innerHTML = JSON.stringify(data[1])*/
+                    $('table').find('td')[0].innerHTML = JSON.stringify(data[1])
                     count = data[0][0].total_count
-                    let ul_node = document.getElementById('Article')
-                    ul_node.innerHTML = "";
-                    for(i = 0;i<data[1].length;i++){
-                        let li_node = document.createElement('li')
-                        ul_node.appendChild(li_node)
-                        let a_node = document.createElement('a')
-                        li_node.appendChild(a_node)
-                        a_node.setAttribute("href",'/Article.html?id='+data[1][i].ID)
-                        let title_node = document.createTextNode(data[1][i].title)
-                        a_node.appendChild(title_node)
-                    }
                 }
             });
         }

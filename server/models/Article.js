@@ -49,6 +49,21 @@ const Article ={
         } else {
             result = null
         }
+    },
+
+    async selectInPages(pageSize,pageIndex){
+        console.log(pageIndex,pageSize)
+        let result = []
+        let count = await dbUtils.count('Article_table')
+        let _sql = `SELECT * FROM Article_table  LIMIT ${pageIndex}, ${pageSize}`
+        let data = await dbUtils.query( _sql )
+        if(Array.isArray(data) && data.length > 0 ){
+            result[0] = count
+            result[1] = data
+            return result
+        } else {
+            result = null
+        }
     }
 }
 

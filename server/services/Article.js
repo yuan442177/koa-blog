@@ -28,6 +28,14 @@ const Article = {
     async addArticle(art){
         let result = await articleModel.addArticle(art)
         return result
+    },
+
+    /**
+     * 文章分页查询
+     */
+    async selectInPages(pageSize,pageIndex){
+        let result = await articleModel.selectInPages(pageSize,pageIndex)
+        return result
     }
 }
 

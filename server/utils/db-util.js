@@ -49,10 +49,10 @@ let selectById = function( table, id ) {
 }
 
 
-let findDataByPage = function( table, keys, start, end ) {
-    let  _sql =  "SELECT ?? FROM ??  LIMIT ? , ?"
-    return query( _sql, [keys,  table,  start, end ] )
-}
+/*let findDataByPage = function( keys, table, start, end ) {
+    let  _sql =  "SELECT ?? FROM ??  LIMIT ? , ? "
+    return query( _sql, [keys,  table,  start , end ] )
+}*/
 
 
 let insertData = function( table, values ) {
@@ -84,6 +84,7 @@ let selectAll = function(table) {
     return query( _sql, [ table ] )
 }
 
+
 let count = function( table ) {
     let  _sql =  "SELECT COUNT(*) AS total_count FROM ?? "
     return query( _sql, [ table ] )
@@ -93,7 +94,7 @@ module.exports = {
     query,
     createTable,
     findDataById,
-    findDataByPage,
+   /* findDataByPage,*/
     deleteDataById,
     insertData,
     updateData,

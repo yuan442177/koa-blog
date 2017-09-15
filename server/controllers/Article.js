@@ -50,6 +50,16 @@ const Article = {
             resule.message = resule.ERROR_SYS
         }
         return resule
+    },
+
+    /**
+     * 文章分页查询
+     */
+    async selectInPages(ctx){
+        let pageSize = ctx.request.body.pageSize
+        let pageIndex = ctx.request.body.pageIndex
+        let result = await articleService.selectInPages(pageSize,pageIndex)
+        ctx.body = result
     }
 }
 
