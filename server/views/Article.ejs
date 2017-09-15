@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
 </head>
 <body>
 <%= JSON.stringify(data)%>
@@ -36,10 +38,11 @@
 </table>
 
   <form action="/api/admin/addArticle.json" method="post">
-    title:<input type="text" value="" name="title"><br>
-    content:<textarea cols="50" rows="30" name="content"></textarea><br>
-    author:<input type="text" value="" name="author"><br>
+    标题:<input type="text" value="" name="title"><br>
+    正文内容:  <% include ckeditor.inc.ejs%><br>
+    作者:<input type="text" value="" name="author"><br>
     <input type="submit" value="提交">
   </form>
+
 </body>
 </html>
