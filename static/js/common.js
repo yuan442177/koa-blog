@@ -19,7 +19,7 @@ function createNav(){
                 let li_nav = document.createElement('li')
                 ul_nav.appendChild(li_nav)
                 let a_nav = document.createElement('a')
-                a_nav.setAttribute('href','/type?id='+data[i].ID+'.html')
+                a_nav.setAttribute('href','/type.html?id='+data[i].ID+'.html')
                 li_nav.appendChild(a_nav)
                 a_nav.innerHTML=data[i].title
             }

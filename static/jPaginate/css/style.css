@@ -20,7 +20,6 @@
 .jPag-control-front{
 	position:absolute;
 	top:0px;
-    left: 60px !important;
 }
 .jPaginate span{
     cursor:pointer;
