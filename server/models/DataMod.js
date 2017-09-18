@@ -24,6 +24,16 @@ const DataMod = {
     },
 
     /**
+     * 查询所有数据
+     * @param table
+     * @returns {Promise.<*>}
+     */
+    async selectAllDate(table) {
+        let result = await dbUtils.selectAll(table);
+        return result
+    },
+
+    /**
      *新增一条数据
      * @param table
      * @param model

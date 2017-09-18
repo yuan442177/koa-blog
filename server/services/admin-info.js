@@ -4,6 +4,7 @@
 const adminModel = require('./../models/admin-info')
 const userCode = require('./../codes/user')
 const common = require('./../utils/common')
+const DataMod = require('./../models/DataMod')
 
 const admin = {
 
@@ -13,7 +14,7 @@ const admin = {
      * @return {object}      创建结果
      */
     async selectAlluser() {
-        let result = await adminModel.selectAlluser()
+        let result = await DataMod.selectAllDate('user_info')
         return result
     },
 
@@ -23,7 +24,7 @@ const admin = {
      * @return {object}      创建结果
      */
     async selectUser(id) {
-        let result = await adminModel.selectUser(id)
+        let result = await DataMod.selectById('user_info',id)
         return result
     },
 

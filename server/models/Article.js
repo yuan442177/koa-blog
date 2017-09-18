@@ -44,14 +44,14 @@ const Article ={
             result = null
         }
     },
-    async selectArticle(id){
+/*    async selectArticle(id){
         let result = await dbUtils.selectById('Article_table',id)
         if ( Array.isArray(result) && result.length > 0 ) {
             return result
         } else {
             result = null
         }
-    },
+    },*/
 
     /**
      * 分页

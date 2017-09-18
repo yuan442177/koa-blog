@@ -53,15 +53,15 @@
     <tbody>
     <% for(var i = 0;i<body.data.length;i++){%>
     <tr>
-      <td><%= body.data[i].ID%></td>
+      <td><%= body.data[i].id%></td>
       <td><%= body.data[i].email%></td>
       <td><%= body.data[i].name%></td>
       <td><%= body.data[i].password%></td>
       <td id="oldTime"><%= body.data[i].create_time%></td>
       <td><%= body.data[i].level%></td>
       <td>
-        <a href="/admin/user?act=mod&id=<%=body.data[i].ID%>">修改</a>
-        <a href="?act=remove&id=<%= body.data[i].ID%>"
+        <a href="/admin/user?act=mod&id=<%=body.data[i].id%>">修改</a>
+        <a href="?act=remove&id=<%= body.data[i].id%>"
            onclick="return confirm('确定删除吗')">删除</a>
       </td>
     </tr>

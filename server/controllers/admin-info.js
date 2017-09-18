@@ -75,34 +75,3 @@ const admin = {
     }
 }
 module.exports = admin
-/*
-const adminInfos = {
-    /!**
-     * 查询出所有用户信息
-     * @param  {obejct} ctx 上下文对象
-     *!/
-    async selectAlluser(ctx) {
-        let result = {
-            length:0,
-            data:[]
-        }
-        let adminInfo = await adminInfoService.selectAlluser()
-        if (adminInfo) {
-            result.data = adminInfo
-            result.length = adminInfo.length
-        } else {
-            result = ['error']
-        }
-        console.log('查询到数据量:'+result.length)
-        return result
-    },
-    async indexPage ( ctx ) {
-        let body = await adminInfos.selectAlluser()
-       /!* body.data.times = common.time2date(body.data.create_time);
-        console.log(body.data.times)*!/
-        await ctx.render('admin', {
-            body
-        })
-    },
-}
-module.exports = adminInfos*/
