@@ -1,6 +1,11 @@
 <script src="./../../ckeditor/ckeditor.js"></script>
 <script src="./../../ckeditor/config.js"></script>
+<%if(typeof updateData == 'undefined'){%>
 <textarea name="content" style="width: 500px;"></textarea>
+<%}%>
+<%if(typeof updateData != 'undefined'){%>
+<textarea name="content" style="width: 500px;"><%= updateData[0].content%></textarea>
+<%}%>
 <script>
     //工具栏为自定义类型
     CKEDITOR.replace('content', { height: '240px', width: '600px' });

@@ -6,6 +6,7 @@ const router = require('koa-router')()
 const userInfo = require('./../controllers/user-info')
 const adminInfo = require('./../controllers/admin-info')
 const article = require('./../controllers/Article')
+const type = require('./../controllers/Type')
 
 /**
  * 后台渲染
@@ -52,10 +53,45 @@ module.exports = router
             console.log('ADD user TODO')
         }
     })
+
+    /**
+     * 文章管理页面
+     */
     .get('/Article',async(ctx,next)=>{
         if(ctx.session && ctx.session.isLogin == true && ctx.session.userName){
-            let data = await article.selectAllArticle()
-            await ctx.render('Article',{
+            if(ctx.query.act == 'remove'){
+                let data = await article.delectArticle(ctx.query.id)
+                /*console.log('admin')
+                 console.log(result)*/
+                ctx.redirect('Article')
+            }else if(ctx.query.act == 'update'){
+                let data_id = await article.selectArticle(ctx.query.id)
+                let data = await article.selectAllArticle()
+                await ctx.render('Article',{
+                    data:data,
+                    updateData:data_id
+                })
+            }else{
+                let data = await article.selectAllArticle()
+                await ctx.render('Article',{
+                    data
+                })
+            }
+        }else{
+            // 没有登录态则跳转到错误页面
+            await ctx.render('error', {
+                body:'error'
+            })
+        }
+    })
+
+    /**
+     * 分类(类型)管理
+     */
+    .get('/Type',async(ctx,next)=>{
+        if(ctx.session && ctx.session.isLogin == true && ctx.session.userName){
+            let data = await type.selectAllType()
+            await ctx.render('Type',{
                 data
             })
         }else {

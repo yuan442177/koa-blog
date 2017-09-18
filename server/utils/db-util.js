@@ -68,7 +68,7 @@ let updateData = function( table, values, id ) {
 
 
 let deleteDataById = function(table,id) {
-    let _sql = "DELETE FROM ? WHERE id = ?"
+    let _sql = "DELETE FROM ?? WHERE id = ?"
     return query( _sql, [table, id] )
 }
 

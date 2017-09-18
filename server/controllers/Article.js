@@ -26,9 +26,11 @@ const Article = {
     /**
      * 根据id查找文章
      */
+    async selectArticle(id){
+        let result = await articleService.selectArticle(id)
+        return result
+    },
     async selectArticleUser(ctx){
-       /* ctx.body=ctx.request.body*/
- /*       console.log(ctx.request.body.id)*/
         let id = ctx.request.body.id
         let result = await articleService.selectArticle(id)
         ctx.body = result
@@ -42,7 +44,9 @@ const Article = {
             title: formData.title,
             content: formData.content,
             time: new Date(),
-            author:formData.author
+            author:formData.author,
+            Tag:formData.Tag,
+            type:formData.type
         })
         if ( resule && resule.insertId * 1 > 0) {
             ctx.redirect('/admin/Article')
@@ -60,6 +64,11 @@ const Article = {
         let pageIndex = ctx.request.body.pageIndex
         let result = await articleService.selectInPages(pageSize,pageIndex)
         ctx.body = result
+    },
+
+    async delectArticle(id){
+        let result = await articleService.delectArticle(id)
+        return result
     }
 }
 

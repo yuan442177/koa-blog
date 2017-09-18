@@ -3,6 +3,7 @@
  */
 /*文章业务层*/
 const articleModel = require('./../models/Article')
+const DataMod = require('./../models/DataMod')
 const common = require('./../utils/common')
 
 const Article = {
@@ -17,16 +18,24 @@ const Article = {
     /**
      * 根据id查找文章
      */
-    async selectArticle(id){
+    /*async selectArticle(id){
       let result = await articleModel.selectArticle(id)
+        return result
+    },*/
+    async selectArticle(id){
+        let result = await DataMod.selectById('Article_table',id)
         return result
     },
 
     /**
      * 新增一篇文章
     * */
-    async addArticle(art){
+    /*async addArticle(art){
         let result = await articleModel.addArticle(art)
+        return result
+    },*/
+    async addArticle(art){
+        let result = await DataMod.insert('Article_table',art)
         return result
     },
 
@@ -35,6 +44,11 @@ const Article = {
      */
     async selectInPages(pageSize,pageIndex){
         let result = await articleModel.selectInPages(pageSize,pageIndex)
+        return result
+    },
+
+    async delectArticle(id){
+        let result = await articleModel.delectArticle(id)
         return result
     }
 }

@@ -17,7 +17,9 @@ const Article ={
      * 删
      */
     async delectArticle(id){
-        let result = await dbUtils.deleteDataById('Article_table', id)
+        let result = await dbUtils.deleteDataById('article_table', id)
+       /* console.log('mod')
+        console.log(result)*/
         return result
     },
 
@@ -51,8 +53,13 @@ const Article ={
         }
     },
 
+    /**
+     * 分页
+     * @param pageSize
+     * @param pageIndex
+     * @returns {Promise.<Array>}
+     */
     async selectInPages(pageSize,pageIndex){
-        console.log(pageIndex,pageSize)
         let result = []
         let count = await dbUtils.count('Article_table')
         let _sql = `SELECT * FROM Article_table  LIMIT ${pageIndex}, ${pageSize}`

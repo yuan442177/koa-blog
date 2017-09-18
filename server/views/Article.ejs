@@ -4,10 +4,26 @@
   <meta charset="UTF-8">
   <title></title>
   <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="./../../ckeditor/ckeditor.js"></script>
+  <script src="./../../ckeditor/config.js"></script>
 
 </head>
 <body>
-<%= JSON.stringify(data)%>
+<%if(typeof updateData == 'undefined'){%>
+<form action="/api/admin/addArticle.json" method="post">
+  标题:<input type="text" value="" name="title"><br>
+  正文内容:  <% include ckeditor.inc.ejs%><br>
+  作者:<input type="text" value="" name="author"><br>
+  Tag:<input type="text" value="" name="Tag"><br>
+  分类:
+  <select name="type">
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+  </select>
+  <input type="submit" value="提交">
+</form>
+<%}%>
 <table border="1" width="100%">
   <thead>
   <tr>
@@ -16,6 +32,8 @@
     <th>内容</th>
     <th>时间</th>
     <th>作者</th>
+    <th>Tag</th>
+    <th>分类</th>
     <th>操作</th>
   </tr>
   </thead>
@@ -27,8 +45,10 @@
     <td><%= data[i].content%></td>
     <td><%= data[i].time%></td>
     <td><%= data[i].author%></td>
+    <td><%= data[i].tag%></td>
+    <td><%= data[i].type%></td>
     <td>
-      <a href="/admin/user?act=mod&id=<%= data[i].id%>">修改</a>
+      <a href="?act=update&id=<%= data[i].id%>">修改</a>
       <a href="?act=remove&id=<%= data[i].id%>"
          onclick="return confirm('确定删除吗')">删除</a>
     </td>
@@ -37,12 +57,55 @@
   </tbody>
 </table>
 
+<!--修改文章-->
+<%if(typeof updateData != 'undefined'){%>
+<div>
   <form action="/api/admin/addArticle.json" method="post">
-    标题:<input type="text" value="" name="title"><br>
+    <input hidden name="id" value="<%= updateData[0].id%>"><br>
+    标题:<input type="text" value="<%= updateData[0].title%>" name="title"><br>
     正文内容:  <% include ckeditor.inc.ejs%><br>
-    作者:<input type="text" value="" name="author"><br>
-    <input type="submit" value="提交">
+    作者:<input type="text" value="<%= updateData[0].author%>" name="author"><br>
+    Tag:<input type="text" value="<%= updateData[0].tag%>" name="Tag"><br>
+    分类:
+    <select name="type">
+      <option value="A">A</option>
+      <option value="B">B</option>
+      <option value="C">C</option>
+    </select>
+    <input type="submit" value="确定">
+    <a href="Article">取消修改</a>
   </form>
+</div>
+<%}%>
+
+<script>
+    //工具栏为自定义类型
+    CKEDITOR.replace('content', { height: '240px', width: '600px' });
+    CKEDITOR.replace( 'content',
+        {
+            toolbar :
+                [
+                    //加粗     斜体，     下划线      穿过线      下标字        上标字
+                    ['Bold','Italic','Underline','Strike','Subscript','Superscript'],
+                    // 数字列表          实体列表            减小缩进    增大缩进
+                    ['NumberedList','BulletedList','-','Outdent','Indent'],
+                    //左对 齐             居中对齐          右对齐          两端对齐
+                    ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+                    //超链接  取消超链接 锚点
+                    ['Link','Unlink','Anchor'],
+                    //图片    flash    表格       水平线            表情       特殊字符        分页符
+                    ['Image','Flash','Table','HorizontalRule','Smiley','SpecialChar','PageBreak'],
+                    '/',
+                    // 样式       格式      字体    字体大小
+                    ['Styles','Format','Font','FontSize'],
+                    //文本颜色     背景颜色
+                    ['TextColor','BGColor'],
+                    //全屏           显示区块
+                    ['Maximize', 'ShowBlocks','-']
+                ]
+        }
+    );
+</script>
 
 </body>
 </html>

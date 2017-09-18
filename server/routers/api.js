@@ -8,7 +8,8 @@
 const router = require('koa-router')()
 const userInfoController = require('./../controllers/user-info')
 const adminInfoController = require('./../controllers/admin-info')
-const article = require('./../controllers/Article')
+const articleController = require('./../controllers/Article')
+const typeController = require('./../controllers/Type')
 
 const routers = router
     .get('/user/getUserInfo.json', userInfoController.getLoginUserInfo)
@@ -16,11 +17,12 @@ const routers = router
     .post('/user/signUp.json', userInfoController.signUp)
   /*  .get('/admin/allUser.json', adminInfoController.selectAlluser)*/
     .post('/admin/updateUserInfo.json', adminInfoController.updateUserInfo)
-    .post('/admin/addArticle.json', article.addArticle)
-    .post('/admin/selectAllArticleUser', article.selectAllArticleUser)
-    .get('/admin/selectAllArticleUserGet', article.selectAllArticleUser)
-    .post('/admin/selectArticleUser', article.selectArticleUser)
-    .post('/admin/selectInPages', article.selectInPages)
+    .post('/admin/addArticle.json', articleController.addArticle)
+    .post('/admin/selectAllArticleUser', articleController.selectAllArticleUser)
+    .get('/admin/selectAllArticleUserGet', articleController.selectAllArticleUser)
+    .post('/admin/selectArticleUser', articleController.selectArticleUser)
+    .post('/admin/selectInPages', articleController.selectInPages)
+    .post('/type/nav', typeController.selectAllTypeUser)
 
 
 module.exports = routers

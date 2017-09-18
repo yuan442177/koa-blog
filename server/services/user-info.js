@@ -7,6 +7,7 @@ const validator = require('validator')
 const userModel = require('./../models/user-info')
 const userCode = require('./../codes/user')
 const common = require('./../utils/common')
+const DataMod = require('./../models/DataMod')
 
 const user = {
 
@@ -15,8 +16,12 @@ const user = {
      * @param  {object} user 用户信息
      * @return {object}      创建结果
      */
-    async create( user ) {
+/*    async create( user ) {
         let result = await userModel.create(user)
+        return result
+    },*/
+    async create(user){
+        let result = await DataMod.insert('user_info',user)
         return result
     },
 
