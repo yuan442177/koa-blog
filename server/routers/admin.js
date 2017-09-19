@@ -15,20 +15,21 @@ const type = require('./../controllers/Type')
  */
 module.exports = router
     .get( '/',async(ctx, next) => {//千万别把这里的  async 忘了一个下午的找问题 结果出在这里
-        /*console.log('session==')
-        console.log(ctx.session)*/
-        if(ctx.query.act == 'remove'){
-            console.log('删除TODO')
-            await userInfo.delectUser(ctx.query.id)
-            ctx.redirect('/admin')
-        }else if(ctx.session && ctx.session.isLogin == true && ctx.session.userName){
-            let data = await adminInfo.selectAlluser() //ejs后台渲染
-            let username = ctx.session.userName
-            await ctx.render('admin', {
-                body:data,
-                username:username
-            })
-        }else {
+        if(ctx.session && ctx.session.isLogin == true && ctx.session.userName){
+            if(ctx.query.act == 'remove'){
+                console.log('删除TODO')
+                await userInfo.delectUser(ctx.query.id)
+                ctx.redirect('/admin')
+            }else{
+                let data = await adminInfo.selectAlluser() //ejs后台渲染
+                let username = ctx.session.userName
+                await ctx.render('admin', {
+                    body:data,
+                    username:username
+                })
+            }
+        }
+        else {
             // 没有登录态则跳转到错误页面
             await ctx.render('error', {
                 body:'error'
@@ -49,7 +50,7 @@ module.exports = router
                 body:allData,
                 username:username
             });
-        }else if(ctx.url.act == 'add'){
+        }else if(ctx.query.act == 'resetpassword'){
             console.log('ADD user TODO')
         }
     })
@@ -61,8 +62,6 @@ module.exports = router
         if(ctx.session && ctx.session.isLogin == true && ctx.session.userName){
             if(ctx.query.act == 'remove'){
                 let data = await article.delectArticle(ctx.query.id)
-                /*console.log('admin')
-                 console.log(result)*/
                 ctx.redirect('Article')
             }else if(ctx.query.act == 'update'){
                 let data_id = await article.selectArticle(ctx.query.id)

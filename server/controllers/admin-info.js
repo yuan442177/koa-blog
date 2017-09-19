@@ -64,14 +64,27 @@ const admin = {
      * */
     async updateUserInfo(ctx){
         let formData = ctx.request.body
-        console.log('co')
-        console.log(formData)
+/*        console.log('co')
+        console.log(formData)*/
         let result = await adminInfoService.updateUserInfo(formData)
         if(result.affectedRows == 1){
             ctx.redirect('/admin')
         }else{
             ctx.redirect('/error')
         }
+    },
+
+    /**
+     * 获取表单新密码 重置密码
+     * @param ctx
+     * @returns {Promise.<*|Promise.<void>>}
+     */
+    async resetPassword(ctx){
+        let formData = ctx.request.body
+        console.log('con')
+        console.log(formData)
+        let result = await adminInfoService.resetPassword({password: formData.password},formData.id)
+        ctx.body = result
     }
 }
 module.exports = admin

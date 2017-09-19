@@ -30,7 +30,11 @@ const DataMod = {
      */
     async selectAllDate(table) {
         let result = await dbUtils.selectAll(table);
-        return result
+        if ( Array.isArray(result) && result.length > 0 ) {
+            return result
+        } else {
+            result = null
+        }
     },
 
     /**
@@ -40,8 +44,51 @@ const DataMod = {
      * @returns {Promise.<*>}
      */
     async insert(table,model){
+        /*console.log('DataMod')
+        console.log(model)*/
         let result = await dbUtils.insertData( table, model )
         return result
     },
+
+    /**
+     * 根据ID删除
+     * @param table
+     * @param id
+     * @returns {Promise.<*>}
+     */
+    async deleteDataById(table,id){
+        let result = await dbUtils.deleteDataById(table, id)
+        return result
+    },
+
+    /**
+     * 根据id更新
+     * @param table
+     * @param value
+     * @param id
+     * @returns {Promise.<*>}
+     */
+    async update(table,value,id){
+/*        console.log('DataMod')
+        console.log(value)*/
+        let result = await dbUtils.updateData(table,value,id)
+        return result
+    },
+
+    /**
+     * query综合语句
+     * @param _sql
+     * @returns {Promise.<*>}
+     */
+    async query(_sql){
+        let result = await dbUtils.query(_sql)
+        return result
+    },
+
+    async count(table){
+        let result = await dbUtils.count(table)
+        return result
+    }
+
 }
 module.exports = DataMod

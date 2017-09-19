@@ -9,6 +9,8 @@ const Article = {
     /**
      * admin
      * 查询出所有的文章
+     * @param ctx
+     * @returns {Promise.<*|Promise>}
      */
     async selectAllArticle(ctx){
         let result = await articleService.selectAllArticle()
@@ -17,6 +19,8 @@ const Article = {
     /**
      * 前台
      * 查询出所有的文章
+     * @param ctx
+     * @returns {Promise.<void>}
      */
     async selectAllArticleUser(ctx){
         let result = await articleService.selectAllArticle()
@@ -25,6 +29,8 @@ const Article = {
 
     /**
      * 根据id查找文章
+     * @param id
+     * @returns {Promise.<*|Promise>}
      */
     async selectArticle(id){
         let result = await articleService.selectArticle(id)
@@ -35,8 +41,11 @@ const Article = {
         let result = await articleService.selectArticle(id)
         ctx.body = result
     },
+
     /**
      * 新增一篇文章
+     * @param ctx
+     * @returns {Promise.<*|Promise>}
      */
     async addArticle(ctx){
         let formData = ctx.request.body
@@ -57,7 +66,9 @@ const Article = {
     },
 
     /**
-     * 文章分页查询
+     * 分页
+     * @param ctx
+     * @returns {Promise.<void>}
      */
     async selectInPages(ctx){
         let pageSize = ctx.request.body.pageSize
@@ -66,8 +77,44 @@ const Article = {
         ctx.body = result
     },
 
+    /**
+     * 根据id删除
+     * @param id
+     * @returns {Promise.<*|Promise.<*|Promise.<*>>>}
+     */
     async delectArticle(id){
         let result = await articleService.delectArticle(id)
+        return result
+    },
+
+    /**
+     * 更新文章
+     * @param ctx
+     * @returns {Promise.<void>}
+     */
+    async updateArticle(ctx){
+        /*方法二
+        let formData = ctx.request.body
+        let result = await articleService.updateArticle(formData)
+        if(result.affectedRows == 1){
+            ctx.redirect('/admin/Article')
+        }else{
+            ctx.redirect('/error')
+        }*/
+        let formData = ctx.request.body
+        let result = await articleService.updateArticle({
+            title: formData.title,
+            content: formData.content,
+            time: new Date(),
+            author:formData.author,
+            Tag:formData.Tag,
+            type:formData.type
+        },formData.id)
+        if ( result && result.changedRows * 1 > 0) {
+            ctx.redirect('/admin/Article')
+        } else {
+            result.message = result.ERROR_SYS
+        }
         return result
     }
 }

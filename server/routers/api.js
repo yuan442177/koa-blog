@@ -22,7 +22,9 @@ const routers = router
     .get('/admin/selectAllArticleUserGet', articleController.selectAllArticleUser)
     .post('/admin/selectArticleUser', articleController.selectArticleUser)
     .post('/admin/selectInPages', articleController.selectInPages)
+    .post('/admin/updateArticle', articleController.updateArticle)
     .post('/type/nav', typeController.selectAllTypeUser)
+    .post('/admin/resePassword',adminInfoController.resetPassword)
 
 
 module.exports = routers

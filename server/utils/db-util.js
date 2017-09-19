@@ -18,6 +18,8 @@ let query = function( sql, values ) {
             if (err) {
                 resolve( err )
             } else {
+              /*  console.log('db_')
+                console.log(sql)*/
                 connection.query(sql, values, ( err, rows) => {
 
                     if ( err ) {
@@ -49,10 +51,10 @@ let selectById = function( table, id ) {
 }
 
 
-/*let findDataByPage = function( keys, table, start, end ) {
-    let  _sql =  "SELECT ?? FROM ??  LIMIT ? , ? "
-    return query( _sql, [keys,  table,  start , end ] )
-}*/
+let findDataByPage = function( table, start, end ) {
+    let  _sql =  "SELECT * FROM ??  LIMIT ? , ? "
+    return query( _sql, [ table,  start , end ] )
+}
 
 
 let insertData = function( table, values ) {
@@ -63,6 +65,9 @@ let insertData = function( table, values ) {
 
 let updateData = function( table, values, id ) {
     let _sql = "UPDATE ?? SET ? WHERE id = ?"
+    console.log('db')
+    console.log(values)
+    console.log(id)
     return query( _sql, [ table, values, id ] )
 }
 
@@ -94,7 +99,7 @@ module.exports = {
     query,
     createTable,
     findDataById,
-   /* findDataByPage,*/
+    findDataByPage,
     deleteDataById,
     insertData,
     updateData,
