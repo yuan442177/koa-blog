@@ -57,12 +57,11 @@
       <td><%= body.data[i].name%></td>
       <td>
         <div style="display: none;" class="resePassword" id="resePassword-<%= body.data[i].id%>" >
-          <input type="text" id="reseId-<%= body.data[i].id%>" value="<%= body.data[i].id%>" style="display: block">
           <input type="text" id="newPassword-<%= body.data[i].id%>" value="<%= body.data[i].password%>" name="password">
-          <input type="button" id="onUpdate" value="确认">
+          <input type="button" id="onUpdate" onclick="setNewPassword()" value="确认">
           <a href="#" class="unUpdate">取消</a>
         </div>
-          <button class="" id="reseBtn-<%= body.data[i].id%>" onclick="getID(this)" >重置密码</button>
+          <button class="reseBtn" id="reseBtn-<%= body.data[i].id%>" onclick="getID(this)" >重置密码</button>
       </td>
       <td id="oldTime"><%= body.data[i].create_time%></td>
       <td><%= body.data[i].level%></td>
@@ -101,18 +100,20 @@
         oldId = $(a).attr("id")
         console.log(oldId)
         spid = oldId.split('-')
+        console.log(spid[1])
         reseDivId = "resePassword-"+spid[1]
         reseBtn = "reseBtn-"+spid[1]
         console.log(reseDivId)
         $('.resePassword').css('display','none')
         $("#"+reseDivId).css('display','block');
+        $(".reseBtn").css('display','block');
         $("#"+reseBtn).css('display','none');
-    };
+    }
     $('.unUpdate').click(function () {
         $("#"+reseDivId).css('display','none');
         $("#"+reseBtn).css('display','block');
     })
-    $('#onUpdate').click(function () {
+    function setNewPassword(){
         var newPassword = 'newPassword-'+spid[1]
         console.log($('#'+newPassword).val())
         $.ajax({
@@ -127,7 +128,7 @@
                 console.log(error)
             }
         });
-    })
+    }
     $(document).ready(function () {
     });
 </script>
