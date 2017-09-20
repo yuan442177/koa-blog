@@ -6,7 +6,8 @@ nodejs koa框架搭建Blog
 
     2017-09-20
         GetQueryString 获取url参数
-        <span>
+        koa-cors中间件用来解决接口返回的数据出现的跨域问题
+
         定时器是一个应用中非常重要的部分。React Native实现了和浏览器一致的定时器Timer。
         提供的方法如下：
         setTimeout, clearTimeout
@@ -20,7 +21,6 @@ nodejs koa框架搭建Blog
         setImmediate则会在当前JavaScript执行块结束的时候执行，就在将要发送批量响应数据到原生之前。
         注意如果你在setImmediate的回调函数中又执行了setImmediate，它会紧接着立刻执行，而不会在调用之前等待原生代码。
         Promise的实现就使用了setImmediate来执行异步调用。
-        <span>
 
 
 
