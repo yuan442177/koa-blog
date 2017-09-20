@@ -68,9 +68,6 @@
                 async:false,
                 data: {pageSize:pageSize,pageIndex:pageIndex},
                 success: function(data){
-                    /*console.log(data)
-                     console.log($('table').find('td'))*/
-                   /* $('table').find('td')[0].innerHTML = JSON.stringify(data[1])*/
                     count = data[0][0].total_count
                     let ul_node = document.getElementById('Article')
                     ul_node.innerHTML = "";

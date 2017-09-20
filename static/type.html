@@ -1,10 +1,48 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>type</title>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="js/common.js"></script>
+
+    <script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "/api/type/selectByType",
+            async:false,
+            data:{title:GetQueryString('type')},
+            success: function(data){
+                let ul_node = document.getElementById('Article')
+                if(data == false){
+                    ul_node.innerHTML = "<h3>没有查到相关数据</h3><br><a href='index.html'>返回主页</a>";
+                }else{
+                    count = data.length
+                    ul_node.innerHTML = "";
+                    for(i = 0;i<data.length;i++){
+                        let li_node = document.createElement('li')
+                        ul_node.appendChild(li_node)
+                        let a_node = document.createElement('a')
+                        li_node.appendChild(a_node)
+                        a_node.setAttribute("href",'/Article.html?id='+data[i].id+'.html')
+                        let title_node = document.createTextNode(data[i].title)
+                        a_node.appendChild(title_node)
+                    }
+                }
+            }
+        });
+    })
+    </script>
 </head>
 <body>
     <h1>Type</h1>
+    <hr>
+    <h2>文章列表</h2>
+    <ul id="Article"></ul>
+    <div class="tcdPageCode"></div>
 </body>
 </html>

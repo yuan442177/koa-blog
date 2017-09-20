@@ -15,7 +15,7 @@ const DataMod = {
      * @returns {Promise.<*>}
      */
     async selectById(table,id){
-        let result = await dbUtils.selectById(table,id)
+        let result = await dbUtils.selectAllById(table,id)
         if ( Array.isArray(result) && result.length > 0 ) {
             return result
         } else {

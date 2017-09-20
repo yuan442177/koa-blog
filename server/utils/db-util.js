@@ -45,9 +45,14 @@ let findDataById = function( table,  id ) {
     return query( _sql, [ table, id ] )
 }
 
-let selectById = function( table, id ) {
+let selectAllById = function( table, id ) {
     let  _sql =  "SELECT * FROM ?? WHERE id = ? "
     return query( _sql, [ table, id ] )
+}
+
+let selectByKey = function(table, key ) {
+    let  _sql =  "SELECT * FROM ?? WHERE ? "
+    return query( _sql, [ table, key ] )
 }
 
 
@@ -104,7 +109,8 @@ module.exports = {
     insertData,
     updateData,
     select,
-    selectById,
+    selectByKey,
+    selectAllById,
     selectAll,
     count,
 }

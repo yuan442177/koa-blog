@@ -25,6 +25,7 @@ const routers = router
     .post('/admin/updateArticle', articleController.updateArticle)
     .post('/type/nav', typeController.selectAllTypeUser)
     .post('/admin/resePassword',adminInfoController.resetPassword)
+    .post('/type/selectByType',typeController.selectByType)
 
 
 module.exports = routers

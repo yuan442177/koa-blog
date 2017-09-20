@@ -19,7 +19,7 @@ function createNav(){
                 let li_nav = document.createElement('li')
                 ul_nav.appendChild(li_nav)
                 let a_nav = document.createElement('a')
-                a_nav.setAttribute('href','/type.html?id='+data[i].ID+'.html')
+                a_nav.setAttribute('href','/type.html?type='+data[i].title)
                 li_nav.appendChild(a_nav)
                 a_nav.innerHTML=data[i].title
             }
@@ -30,4 +30,12 @@ function createNav(){
 //设置标题
 function createTitle() {
     console.log(document.title)
+}
+
+//获取url参数
+function GetQueryString(name)
+{
+    var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if(r!=null)return  unescape(r[2]); return null;
 }

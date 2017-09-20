@@ -17,8 +17,12 @@ const type = {
     },
     async selectAllTypeUser(ctx){
         let result = await typeService.selectAllType()
-/*        console.log('con')
-        console.log(result)*/
+        ctx.body = result
+    },
+
+    async selectByType(ctx){
+        let formData = ctx.request.body
+        let result = await typeService.selectByType(formData)
         ctx.body = result
     }
 }
