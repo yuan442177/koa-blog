@@ -13,8 +13,12 @@ const MysqlStore = require('koa-mysql-session')
 
 const config = require('./../config')
 const routers = require('./routers/index')
+const cors = require('koa-cors')
 
 const server = new koa();
+
+
+server.use(cors());
 
 /*server.use( async (ctx)=>{
     ctx.body = 'Hello Koa2'
